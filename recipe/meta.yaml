@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  skip: True  # [py<36]
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
 
@@ -17,7 +18,8 @@ requirements:
   host:
     - python
     - pip
-    - setuptools_scm >=1.15.0
+    - setuptools_scm >=3.4.1
+    - wheel
   run:
     - python
     - setuptools
@@ -26,6 +28,10 @@ requirements:
 test:
   imports:
     - ptr
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/pytest-dev/pytest-runner
