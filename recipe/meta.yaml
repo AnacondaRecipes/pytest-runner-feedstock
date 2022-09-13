@@ -18,10 +18,12 @@ requirements:
     - python
     - pip
     - setuptools_scm >=3.4.1
+    - setuptools >=56
+    - toml
     - wheel
   run:
     - python
-    - setuptools
+    - setuptools >=56
     - pytest
 
 test:
