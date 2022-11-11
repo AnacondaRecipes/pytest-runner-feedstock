@@ -1,4 +1,4 @@
-{% set version = "5.3.1" %}
+{% set version = "6.0.0" %}
 
 package:
   name: pytest-runner
@@ -6,12 +6,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pytest-runner/pytest-runner-{{ version }}.tar.gz
-  sha256: 0fce5b8dc68760f353979d99fdd6b3ad46330b6b1837e2077a89ebcf204aac91
+  sha256: b4d85362ed29b4c348678de797df438f0f0509497ddb8c647096c02a6d87b685
 
 build:
   number: 0
-  skip: True  # [py<36]
-  noarch: python
+  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
 
 requirements:
@@ -19,10 +18,12 @@ requirements:
     - python
     - pip
     - setuptools_scm >=3.4.1
+    - setuptools >=56
+    - toml
     - wheel
   run:
     - python
-    - setuptools
+    - setuptools >=56
     - pytest
 
 test:
@@ -40,6 +41,7 @@ about:
   license_file: LICENSE
   summary: Invoke py.test as distutils command with dependency resolution.
   dev_url: https://github.com/pytest-dev/pytest-runner
+  doc_url: https://github.com/pytest-dev/pytest-runner
 
 extra:
   recipe-maintainers:
