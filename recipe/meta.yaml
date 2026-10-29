@@ -23,7 +23,7 @@ requirements:
     - wheel
   run:
     - python
-    - setuptools >=56
+    - setuptools >=56,<82  # 82 dropped pkg_resources; ptr imports it
     - pytest
 
 test:
