@@ -5,13 +5,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pytest-runner/pytest-runner-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pytest-runner/pytest-runner-{{ version }}.tar.gz
   sha256: b4d85362ed29b4c348678de797df438f0f0509497ddb8c647096c02a6d87b685
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vvv
 
 requirements:
   host:
@@ -23,7 +23,7 @@ requirements:
     - wheel
   run:
     - python
-    - setuptools >=56
+    - setuptools >=56,<82  # 82 dropped pkg_resources; ptr imports it
     - pytest
 
 test:
@@ -40,10 +40,13 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Invoke py.test as distutils command with dependency resolution.
+  description: Invoke py.test as distutils command with dependency resolution.
   dev_url: https://github.com/pytest-dev/pytest-runner
   doc_url: https://github.com/pytest-dev/pytest-runner
 
 extra:
+  skip-lints:
+    - python_build_tools_in_host  # setuptools is a runtime dep of the distutils pytest command
   recipe-maintainers:
     - dopplershift
     - ocefpaf
